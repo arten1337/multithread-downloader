@@ -1,5 +1,7 @@
 package com.example.downloader;
 
+import com.example.downloader.core.DownloadManager;
+
 import java.nio.file.Path;
 
 public class App {

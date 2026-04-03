@@ -1,4 +1,6 @@
-package com.example.downloader;
+package com.example.downloader.progress;
+
+import com.example.downloader.util.FormatUtils;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -65,25 +67,19 @@ public class ProgressTracker {
             String eta = "N/A";
             if (speed > 0) {
                 long remaining = (long) ((totalSize - current) / speed);
-                eta = formatTime(remaining);
+                eta = FormatUtils.formatTime(remaining);
             }
 
             System.out.printf("\r%s %5.1f%% | %s / %s | %s/s | ETA: %s   ",
                     bar, percent,
-                    DownloadManager.formatSize(current),
-                    DownloadManager.formatSize(totalSize),
-                    DownloadManager.formatSize((long) speed),
+                    FormatUtils.formatSize(current),
+                    FormatUtils.formatSize(totalSize),
+                    FormatUtils.formatSize((long) speed),
                     eta);
         } else {
             System.out.printf("\r%s | %s/s   ",
-                    DownloadManager.formatSize(current),
-                    DownloadManager.formatSize((long) speed));
+                    FormatUtils.formatSize(current),
+                    FormatUtils.formatSize((long) speed));
         }
-    }
-
-    private static String formatTime(long seconds) {
-        if (seconds < 60) return seconds + "s";
-        if (seconds < 3600) return (seconds / 60) + "m " + (seconds % 60) + "s";
-        return (seconds / 3600) + "h " + ((seconds % 3600) / 60) + "m";
     }
 }

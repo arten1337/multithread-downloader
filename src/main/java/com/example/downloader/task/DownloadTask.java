@@ -1,4 +1,8 @@
-package com.example.downloader;
+package com.example.downloader.task;
+
+import com.example.downloader.core.ChunkRange;
+import com.example.downloader.core.ChunkResult;
+import com.example.downloader.progress.ProgressTracker;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;

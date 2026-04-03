@@ -1,5 +1,8 @@
-package com.example.downloader;
+package com.example.downloader.core;
 
+import com.example.downloader.progress.ProgressTracker;
+import com.example.downloader.task.DownloadTask;
+import com.example.downloader.util.FormatUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -37,7 +40,7 @@ public class DownloadManager {
             return;
         }
 
-        System.out.printf("File size: %s%n", formatSize(fileSize));
+        System.out.printf("File size: %s%n", FormatUtils.formatSize(fileSize));
 
         // Load or create download metadata for resume support
         DownloadMetadata metadata = loadOrCreateMetadata(fileSize);
@@ -164,13 +167,5 @@ public class DownloadManager {
 
     private Path metadataPath() {
         return outputPath.resolveSibling(outputPath.getFileName() + ".mtdl");
-    }
-
-    static String formatSize(long bytes) {
-        if (bytes < 1024) return bytes + " B";
-        String[] units = {"KB", "MB", "GB", "TB"};
-        int exp = (int) (Math.log(bytes) / Math.log(1024));
-        exp = Math.min(exp, units.length);
-        return String.format("%.2f %s", bytes / Math.pow(1024, exp), units[exp - 1]);
     }
 }
