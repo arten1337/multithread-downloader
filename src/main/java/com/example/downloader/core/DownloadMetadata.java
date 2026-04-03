@@ -1,4 +1,4 @@
-package com.example.downloader;
+package com.example.downloader.core;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
